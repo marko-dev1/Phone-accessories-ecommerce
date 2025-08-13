@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Registration</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .admin-registration {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        body {
+            background-color: #f0f0f0;
+        }
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+    
+
+<!-- <div class="admin-registration-form">
+    <h2>Admin Registration</h2>
+    <form id="adminRegisterForm">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" required minlength="8">
+        </div>
+        
+        <div class="form-group">
+            <label for="adminSecret">Admin Secret Key</label>
+            <input type="password" id="adminSecret" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Register Admin</button>
+    </form>
+    
+    <div id="adminRegisterMessage" class="message"></div>
+</div> -->
+
+
+<!-- admin-register.html -->
+<div class="admin-registration">
+    <h2>Create Admin Account</h2>
+    <form id="adminRegisterForm">
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="name" required>
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email" required>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="password" minlength="4" required>
+        </div>
+        <div class="form-group">
+            <label>Admin Secret Key</label>
+            <input type="password" id="adminSecret" required>
+        </div>
+       <button type="submit" class="btn btn-primary">Register Admin</button>
+    </form>
+    </form>
+    <div id="adminRegisterMessage"></div>
+</div>
+<script>
+    document.getElementById('adminRegisterForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const form = e.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const messageEl = document.getElementById('adminRegisterMessage');
+    
+    // Get form values
+    const formData = {
+        name: form.querySelector('#name').value.trim(),
+        email: form.querySelector('#email').value.trim(),
+        password: form.querySelector('#password').value,
+        adminSecret: form.querySelector('#adminSecret').value
+    };
+
+    // Validate
+    if (!formData.name || !formData.email || !formData.password || !formData.adminSecret) {
+        showMessage('All fields are required', 'error', messageEl);
+        return;
+    }
+
+    try {
+        submitBtn.disabled = true;
+        showMessage('Creating admin account...', 'info', messageEl);
+        
+        const response = await fetch('/api/auth/register-admin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+            showMessage('Admin account created successfully!', 'success', messageEl);
+            form.reset();
+        } else {
+            showMessage(result.message || 'Registration failed', 'error', messageEl);
+        }
+    } catch (error) {
+        console.error('Registration error:', error);
+        showMessage('Network error. Please try again.', 'error', messageEl);
+    } finally {
+        submitBtn.disabled = false;
+    }
+});
+
+function showMessage(message, type, element) {
+    element.textContent = message;
+    element.className = `message ${type}`;
+}
+</script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
-const auth = require('../middlewares/auth');
+const adminAuth = require('../middlewares/adminAuth');
 const db = require('../config/db');
 const multer = require('multer');
 const path = require('path');
@@ -69,7 +69,7 @@ router.get('/:id', async (req, res) => {
 //     }
 // });
 // Update product
-router.put('/:id', auth, async (req, res) => {
+router.put('/:id', adminAuth, async (req, res) => {
   const productId = req.params.id;      
     const { name, description, category, price, old_price, stock_quantity } = req.body;
 
@@ -87,7 +87,7 @@ router.put('/:id', auth, async (req, res) => {
     }
 });     
 // Delete product
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/:id', adminAuth, async (req, res) => {
   const productId = req.params.id;
   try {
     const [result] = await db.query('DELETE FROM products WHERE id = ?', [productId]);
@@ -130,8 +130,8 @@ router.get('/', productController.getAllProducts);
 router.get('/:id', productController.getProductById);
 
 // Protected routes (admin only in a real app)
-router.post('/', auth, productController.createProduct);
-router.put('/:id', auth, productController.updateProduct);
-router.delete('/:id', auth, productController.deleteProduct);
+router.post('/', adminAuth, productController.createProduct);
+router.put('/:id', adminAuth, productController.updateProduct);
+router.delete('/:id', adminAuth, productController.deleteProduct);
 
 module.exports = router;

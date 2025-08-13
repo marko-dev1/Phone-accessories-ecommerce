@@ -7,6 +7,7 @@ const path = require('path');
 require('dotenv').config();
 
 // Route imports
+const adminRoutes = require('./routes/adminRoutes');
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
@@ -39,10 +40,12 @@ app.use(session({
 app.use(express.static('public'));
 
 // Routes
+
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/auth', adminRoutes);
 
 // Route guards
 function requireLogin(req, res, next) {
