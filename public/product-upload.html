@@ -141,13 +141,15 @@
             
             const formData = new FormData(this);
             const statusDiv = document.getElementById('status');
+            const token = localStorage.getItem('token');
             
             try {
-                const response = await fetch('/api/products', {
-                    method: 'POST',
-                    body: formData
-                });
-                
+                fetch('/api/products', {
+                 method: 'POST',
+                credentials: 'include', 
+                 body: formData
+});
+
                 const result = await response.json();
                 
                 if (response.ok) {

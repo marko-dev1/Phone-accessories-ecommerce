@@ -49,7 +49,7 @@ router.get('/:id', async (req, res) => {
 });
 // Create new product
 // Note: This route is protected and should only be accessible by admins
-// router.post('/', auth, async (req, res) => {
+// router.post('/', adminAuth, async (req, res) => {
 //   const { name, description, category, price, old_price, stock_quantity } = req.body;
 //   const image_url = req.file ? `/uploads/${req.file.filename}` : null;  
 //     try {
@@ -60,7 +60,7 @@ router.get('/:id', async (req, res) => {
 //         [name, description, category, price, old_price, image_url, stock_quantity]
 //         );
         
-        // Get the newly created product
+//         // Get the newly created product
 //         const [rows] = await db.query('SELECT * FROM products WHERE id = ?', [result.insertId]);
 //         res.status(201).json(rows[0]);
 //     } catch (err) {
