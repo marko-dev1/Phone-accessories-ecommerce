@@ -5,15 +5,22 @@ const cors = require('cors');
 const session = require('express-session');
 const path = require('path');
 require('dotenv').config();
-const mysql = require('mysql2');
 
-const db = mysql.createConnection({
- 
-MYSQLHOST=mysql.railway.internal,
-MYSQLUSER=root,
-MYSQLPASSWORD=UtqviDYUsrfAipsjwIspemFUblDfZrpI,
-MYSQLDATABASE=railway,
-MYSQLPORT=3306
+
+const mysql = require('mysql2/promise');
+
+const pool = mysql.createPool({
+  host: process.env.DB_HOST || 'mysql.railway.internal',
+  user: process.env.DB_USER,        // Railway MySQL username
+  password: process.env.DB_PASSWORD, // Railway MySQL password
+  database: process.env.DB_NAME,     // Railway MySQL database name
+  port: process.env.DB_PORT || 3306,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+  ssl: {
+    rejectUnauthorized: false // Avoids SSL issues in Railway internal connections
+  }
 });
 
 db.connect((err) => {
