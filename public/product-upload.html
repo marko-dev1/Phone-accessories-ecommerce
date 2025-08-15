@@ -1,221 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Product | VitronicsHub</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input, textarea, select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        #preview {
-            max-width: 200px;
-            max-height: 200px;
-            margin-top: 10px;
-            display: none;
-        }
-        #status {
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 4px;
-            display: none;
-        }
-        .success {
-            background-color: #dff0d8;
-            color: #3c763d;
-        }
-        .error {
-            background-color: #f2dede;
-            color: #a94442;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upload Product | VitronicsHub</title>
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+h1 { text-align: center; color: #333; }
+.form-group { margin-bottom: 15px; }
+label { display: block; margin-bottom: 5px; font-weight: bold; cursor: pointer; }
+input, textarea, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+button:hover { background-color: #45a049; }
+#preview {
+    max-width: 200px;
+    max-height: 200px;
+    margin-top: 10px;
+    display: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+#status {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 4px;
+    display: none;
+}
+.success { background-color: #dff0d8; color: #3c763d; }
+.error { background-color: #f2dede; color: #a94442; }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Upload New Product</h1>
-        <form id="productForm">
-            <div class="form-group">
-                <label for="name">Product Name</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea id="description" name="description" rows="3" required></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label for="category">Category</label>
-                <input type="text" id="category" name="category" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="price">Price</label>
-                <input type="number" id="price" name="price" step="0.01" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="old_price">Old Price (Optional)</label>
-                <input type="number" id="old_price" name="old_price" step="0.01">
-            </div>
-            
-            <div class="form-group">
-                <label for="stock_quantity">Stock Quantity</label>
-                <input type="number" id="stock_quantity" name="stock_quantity" required>
-            </div>
-            
-<!--             <div class="form-group"> -->
-<!--                 <label for="image">Product Image</label>
-               <input type="file" id="image" name="image" accept="image/*"  required>
-                <img id="preview" alt="Image preview"> -->
+<div class="container">
+    <h1>Upload New Product</h1>
+    <form id="productForm" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Product Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
 
-<!--                <label for="image">Take Photo</label>
-                  <input type="file"  id="image" name="image" accept="image/*" capture="environment">
-                <img id="preview" alt="Image preview"> -->
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="3" required></textarea>
+        </div>
 
-           <div class="form-group">
-    <label for="image" style="cursor:pointer;">Choose Product Image:</label>
-    <input type="file" id="image" name="image" accept="image/*" required>
-    <img id="preview" alt="Image preview">
+        <div class="form-group">
+            <label for="category">Category</label>
+            <input type="text" id="category" name="category" required>
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price" step="0.01" required>
+        </div>
+
+        <div class="form-group">
+            <label for="old_price">Old Price (Optional)</label>
+            <input type="number" id="old_price" name="old_price" step="0.01">
+        </div>
+
+        <div class="form-group">
+            <label for="stock_quantity">Stock Quantity</label>
+            <input type="number" id="stock_quantity" name="stock_quantity" required>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Choose Product Image</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+            <img id="preview" alt="Image preview">
+        </div>
+
+        <button type="submit">Upload Product</button>
+    </form>
+
+    <div id="status"></div>
 </div>
 
-            
-            
-            <button type="submit">Upload Product</button>
-        </form>
-        
-        <div id="status"></div>
-        
-        <div id="productList" class="product-list"></div>
-    </div>
+<script>
+// Image preview
+document.getElementById('image').addEventListener('change', function(e) {
+    const preview = document.getElementById('preview');
+    const file = e.target.files[0];
+    if (file) {
+        preview.style.display = 'block';
+        preview.src = URL.createObjectURL(file);
+    } else {
+        preview.style.display = 'none';
+    }
+});
 
-    <script>
-        // Image preview
-        document.getElementById('image').addEventListener('change', function(e) {
-            const preview = document.getElementById('preview');
-            const file = e.target.files[0];
-            if (file) {
-                preview.style.display = 'block';
-                preview.src = URL.createObjectURL(file);
-            } else {
-                preview.style.display = 'none';
-            }
-        });
-
-        // Form submission
-        document.getElementById('productForm').addEventListener('submit', async function(e) {
+// Form submission
+document.getElementById('productForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    
+
     const formData = new FormData(this);
     const statusDiv = document.getElementById('status');
-    const token = localStorage.getItem('token');
-    
+
     try {
         const response = await fetch('https://vitronicshub.up.railway.app/api/products', {
             method: 'POST',
-            credentials: 'include', 
+            credentials: 'include',
             body: formData
         });
 
         const result = await response.json();
-        
+
         if (response.ok) {
             statusDiv.textContent = 'Product uploaded successfully!';
             statusDiv.className = 'success';
             statusDiv.style.display = 'block';
-            
-            // fetchProducts(); // refresh product list
+            this.reset();
+            document.getElementById('preview').style.display = 'none';
         } else {
-            statusDiv.textContent = result.message || 'Failed to upload product.';
-            statusDiv.className = 'error';
-            statusDiv.style.display = 'block';
+            throw new Error(result.message || 'Failed to upload product.');
         }
     } catch (err) {
-        console.error('Upload error:', err);
-        statusDiv.textContent = 'An error occurred.';
+        statusDiv.textContent = `Error: ${err.message}`;
         statusDiv.className = 'error';
         statusDiv.style.display = 'block';
+        console.error('Upload error:', err);
     }
 });
-
-
-        // Fetch and display products
-        async function fetchProducts() {
-            try {
-                const response = await fetch('https://vitronicshub.up.railway.app/api/products');
-                const products = await response.json();
-                
-                const productList = document.getElementById('productList');
-                productList.innerHTML = '<h2>Products</h2>';
-                
-                if (products.length === 0) {
-                    productList.innerHTML += '<p>No products found</p>';
-                    return;
-                }
-                
-                const ul = document.createElement('ul');
-                products.forEach(product => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `
-                        <strong>${product.name}</strong> - ksh${product.price}
-                        ${product.old_price ? `<s>ksh${product.old_price}</s>` : ''}
-                        <br>${product.category} | Stock: ${product.stock_quantity}
-                        ${product.image_url ? `<br><img src="${product.image_url}" width="100">` : ''}
-                    `;
-                    ul.appendChild(li);
-                });
-                productList.appendChild(ul);
-            } catch (error) {
-                console.error('Error fetching products:', error);
-            }
-        }
-
-        // Load products when page loads
-        fetchProducts();
-    </script>
+</script>
 </body>
 </html>
