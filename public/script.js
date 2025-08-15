@@ -60,26 +60,64 @@ function showError(element, message) {
     `;
 }
 
+// // Fetch products from database
+// async function fetchProducts() {
+//     try {
+//         const response = await fetch('/api/products?t=' + Date.now()); // Cache busting
+//         if (!response.ok) throw new Error('Network response was not ok');
+        
+//         products = await response.json();
+        
+//         // Create deals (first 4 products with 20% discount)
+//         deals = products.slice(0, 5).map(product => ({
+//             ...product,
+//             price: Math.round(product.price * 0.8), // 20% off
+//             oldPrice: product.price
+//         }));
+        
+//         renderProducts();
+//         renderDeals();
+//     } catch (error) {
+//         console.error('Error fetching products:', error);
+//         throw error;
+//     }
+// }
+
+
 // Fetch products from database
 async function fetchProducts() {
     try {
-        const response = await fetch('/api/products?t=' + Date.now()); // Cache busting
+        // Show skeleton loader instead of blank
+        document.getElementById('productRow').innerHTML = `
+            <div class="loader">Loading products...</div>
+        `;
+
+        const response = await fetch('https://vitronicshub.up.railway.app/api/products?t=' + Date.now());
         if (!response.ok) throw new Error('Network response was not ok');
-        
+
         products = await response.json();
-        
-        // Create deals (first 4 products with 20% discount)
+
+        // Ensure all products have an image
+        products = products.map(p => ({
+            ...p,
+            image: p.image || '/img/placeholder.jpg'
+        }));
+
+        // Create deals (first 5 products with 20% discount)
         deals = products.slice(0, 5).map(product => ({
             ...product,
-            price: Math.round(product.price * 0.8), // 20% off
+            price: Math.round(product.price * 0.8),
             oldPrice: product.price
         }));
-        
+
+        // Render after data is ready
         renderProducts();
         renderDeals();
+
     } catch (error) {
         console.error('Error fetching products:', error);
-        throw error;
+        document.getElementById('productRow').innerHTML =
+            `<p class="error">Failed to load products.</p>`;
     }
 }
 
