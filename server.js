@@ -7,20 +7,29 @@ const path = require('path');
 require('dotenv').config();
 
 
-const mysql = require('mysql2/promise');
+const mysql = require('mysql2');
 
-const pool = mysql.createPool({
-  host: process.env.DB_HOST || 'mysql.railway.internal',
-  user: process.env.DB_USER,        // Railway MySQL username
-  password: process.env.DB_PASSWORD, // Railway MySQL password
-  database: process.env.DB_NAME,     // Railway MySQL database name
-  port: process.env.DB_PORT || 3306,
+// Use createPool instead of createConnection for stability
+const db = mysql.createPool({
+  host: 'mysql.railway.internal',
+  user: 'root',
+  password: 'UtqviDYUsrfAipsjwIspemFUblDfZrpI',
+  database: 'railway',
+  port: 3306,
   waitForConnections: true,
   connectionLimit: 10,
-  queueLimit: 0,
-  ssl: {
-    rejectUnauthorized: false // Avoids SSL issues in Railway internal connections
+  queueLimit: 0
+});
+
+// Test connection
+db.getConnection((err, connection) => {
+  if (err) {
+    console.error('Database connection failed:', err);
+    process.exit(1);
   }
+  console.log('Connected to MySQL Database');
+  connection.release(); // Release connection back to pool
+  createTables();
 });
 
 db.connect((err) => {
