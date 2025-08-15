@@ -101,6 +101,7 @@ const userRoutes = require('./routes/userRoutes');
 const app = express();
 
 // Middleware
+app.use(cors({
 origin: ['http://localhost:5500', 'https://vitronicshub.up.railway.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
