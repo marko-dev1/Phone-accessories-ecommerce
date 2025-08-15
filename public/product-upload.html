@@ -137,40 +137,40 @@
 
         // Form submission
         document.getElementById('productForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const statusDiv = document.getElementById('status');
-            
-            try {
-                const response = await fetch('/api/products', {
-                    method: 'POST',
-                    body: formData
-                });
-                
-                const result = await response.json();
-                
-                if (response.ok) {
-                    statusDiv.textContent = 'Product uploaded successfully!';
-                    statusDiv.className = 'success';
-                    statusDiv.style.display = 'block';
-                    
-                    // Add the new product to the list
-                    fetchProducts();
-                    
-                    // Reset form
-                    this.reset();
-                    document.getElementById('preview').style.display = 'none';
-                } else {
-                    throw new Error(result.message || 'Failed to upload product');
-                }
-            } catch (error) {
-                statusDiv.textContent = `Error: ${error.message}`;
-                statusDiv.className = 'error';
-                statusDiv.style.display = 'block';
-                console.error('Error:', error);
-            }
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const statusDiv = document.getElementById('status');
+    const token = localStorage.getItem('token');
+    
+    try {
+        const response = await fetch('/api/products', {
+            method: 'POST',
+            credentials: 'include', 
+            body: formData
         });
+
+        const result = await response.json();
+        
+        if (response.ok) {
+            statusDiv.textContent = 'Product uploaded successfully!';
+            statusDiv.className = 'success';
+            statusDiv.style.display = 'block';
+            
+            fetchProducts(); // refresh product list
+        } else {
+            statusDiv.textContent = result.message || 'Failed to upload product.';
+            statusDiv.className = 'error';
+            statusDiv.style.display = 'block';
+        }
+    } catch (err) {
+        console.error('Upload error:', err);
+        statusDiv.textContent = 'An error occurred.';
+        statusDiv.className = 'error';
+        statusDiv.style.display = 'block';
+    }
+});
+
 
         // Fetch and display products
         async function fetchProducts() {
