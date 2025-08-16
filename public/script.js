@@ -80,9 +80,7 @@ function renderProducts() {
             ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
             <img src="${product.image_url || product.image || '/img/placeholder.jpg'}" 
                  alt="${product.name}" 
-                 class="product-img"
-                 loading="lazy"
-                 onerror="this.src='/img/placeholder.jpg'">
+                 class="product-img">
             <div class="product-info">
                 <div class="product-category">${product.category}</div>
                 <h3>${product.name}</h3>
@@ -109,9 +107,7 @@ function renderDeals() {
             <span class="product-badge">HOT DEAL</span>
             <img src="${product.image_url || product.image || '/img/placeholder.jpg'}" 
                  alt="${product.name}" 
-                 class="product-img"
-                 loading="lazy"
-                 onerror="this.src='/img/placeholder.jpg'">
+                 class="product-img">
             <div class="product-info">
                 <div class="product-category">${product.category}</div>
                 <h3>${product.name}</h3>
