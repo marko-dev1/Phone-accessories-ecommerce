@@ -59,7 +59,6 @@ function showError(element, message) {
         </div>
     `;
 }
-
 // // Fetch products from database
 // async function fetchProducts() {
 //     try {
