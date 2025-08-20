@@ -622,7 +622,7 @@ nav a:hover {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 0.8rem;
-            font-size: 0.5rem;
+            font-size: 1rem;
             padding: 1rem;
             background: var(--debt);
             color: #fff;
@@ -637,7 +637,7 @@ nav a:hover {
         .footer h2, .footer h3 {
             margin-bottom: 0.8rem;
             color: #f8d210;
-            font-size: 0.9rem;
+            font-size: 1.2rem;
         }
 
         .footer-contact p {
