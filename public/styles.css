@@ -626,7 +626,7 @@ nav a:hover {
             padding: 1rem;
             background: var(--debt);
             color: #fff;
-            min-height: 150px;
+            min-height: 130px;
         }
 
         .footer-contact, .footer-links, .footer-social {
