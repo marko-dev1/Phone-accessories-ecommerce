@@ -623,7 +623,7 @@ nav a:hover {
             border: 1px solid red;
         }
         
-         /* Footer */
+      /* Footer */
       .footer {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -658,6 +658,7 @@ min-height: 170px; /* Control footer height */
   font-size: 1rem;
   margin-right: 10px;
 }
+
 
 
         
