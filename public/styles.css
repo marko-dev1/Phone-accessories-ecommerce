@@ -631,6 +631,7 @@ nav a:hover {
 
         .footer-contact, .footer-links, .footer-social {
             display: flex;
+                align-items:center;
             flex-direction: column;
         }
 
