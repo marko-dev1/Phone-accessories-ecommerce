@@ -631,17 +631,17 @@ nav a:hover {
   padding: 0.5rem;
   background: var(--debt);
   color: #fff;
-min-height: 170px; /* Control footer height */
+min-height: 170px; 
 }
 
 .footer h2, .footer h3 {
   /* margin-bottom: 1rem; */
-  color: #f8d210; /* branding highlight */
+  color: #f8d210;
 }
 
 .footer-links a,
 .footer-social a {
-  display: flex;
+  display: grid;
   margin: 5px 0;
   color: #fefdfd;
   text-decoration: none;
