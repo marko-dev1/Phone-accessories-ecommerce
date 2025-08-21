@@ -645,12 +645,14 @@ nav a:hover {
 /* Social icons */
 .footer-social-icons {
   display: flex;
+justify-content: start;
   gap: 1rem;
   margin-top: 0.5rem;
 }
 
 .footer-social-icons a {
   color: #fefefe;
+justify-content: start;
   font-size: 1.2rem;
   transition: transform 0.3s, color 0.3s;
 }
@@ -669,11 +671,6 @@ nav a:hover {
 .payment-methods strong {
  color: chartreuse;
  font-size: 1rem;
-}
-hr{
-    margin: 10px 0 10px;
-    width: 50%;
-   
 }
 
 /* Bottom note */
@@ -704,11 +701,7 @@ hr{
     justify-content: center;
   }
 
-  hr{
-    margin: 5px 0 5px;
-    width: 100%;
-   
-}
+
 }
 
 
