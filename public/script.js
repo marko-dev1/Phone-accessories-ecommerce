@@ -113,7 +113,7 @@ function renderDeals() {
                 <h3>${product.name}</h3>
                 <div class="price">
                     Ksh ${product.price.toLocaleString()} 
-                    <span class="old-price">Ksh ${product.oldPrice.toLocaleString()}</span>
+                   
                 </div>
                 <button class="btn add-to-cart" data-id="${product.id}">Add to Cart</button>
             </div>
