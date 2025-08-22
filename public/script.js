@@ -53,10 +53,10 @@ async function fetchProducts() {
         
         products = await response.json();
         
-        // Create deals (first 4 products with 20% discount)
+        //To do Create deals (first 4 products with 20% discount)
         deals = products.slice(0, 5).map(product => ({
             ...product,
-            price: Math.round(product.price * 0.8),
+            price: Math.round(product.price ),
             oldPrice: product.price
         }));
         
