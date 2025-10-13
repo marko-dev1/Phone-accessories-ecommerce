@@ -1,12 +1,14 @@
-nstallation
+Installation
+
 git clone https://github.com/marko-dev1/Phone-accessories-ecommerce.git
 cd phone-accessories-ecommerce
+
 npm install
 
 
-Start the server:
+Start the server: node server.js
 
-node server.js
+
 
 
 About this project
