@@ -1,5 +1,5 @@
 nstallation
-git clone https://github.com/<your-username>/phone-accessories-ecommerce.git
+git clone https://github.com/marko-dev1/Phone-accessories-ecommerce.git
 cd phone-accessories-ecommerce
 npm install
 
